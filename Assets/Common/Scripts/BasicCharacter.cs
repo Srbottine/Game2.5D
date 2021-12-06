@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 namespace Common.Scripts
 {
@@ -136,6 +137,7 @@ namespace Common.Scripts
             if (PlayerLife.value == 0)
             {
                 yield return new WaitForSeconds(4);
+                SceneManager.LoadScene("Over");
                 Destroy(player);
             }
 

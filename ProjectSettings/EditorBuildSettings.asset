@@ -11,4 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/5 \u2013 Camera/Boss 1.unity"
     guid: 269ab9ed8e1dd994fa1ca0d6428426ec
+  - enabled: 1
+    path: "Assets/5 \u2013 Camera/Boss 2.unity"
+    guid: 480602faed6b33545b9f3b77458a5f8c
+  - enabled: 1
+    path: "Assets/5 \u2013 Camera/Win.unity"
+    guid: e522a9786222a524e8d8a265b751531a
+  - enabled: 1
+    path: "Assets/5 \u2013 Camera/Over.unity"
+    guid: e66319260f11d54409c66136ada72995
   m_configObjects: {}

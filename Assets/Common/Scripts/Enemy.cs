@@ -1,63 +1,73 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using UnityEngine.AI;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class Enemy : MonoBehaviour
-{
-  public float speed;
-  public float checkRadius;
-  public float attackRadius;
+public class Enemy : MonoBehaviour {
 
-  public bool shouldRotate;
+    private int m_ColCount = 0;
 
-  public LayerMask whatIsPlayer;
+    private float m_DisableTimer;
+    public GameObject enemy;
 
-   private Transform target;
-   private Rigidbody2D rb;
-   private Animator anim;
-   private Vector2 movement;
-   public Vector3 dir;
-
-   private bool isInChaseRange;
-   private bool isInAttackRange;
-
-
-    private void Start()
-   {
-     rb = GetComponent<Rigidbody2D>();
-     anim = GetComponent<Animator>();
-    target = GameObject. FindWithTag("Player").transform;
-   }
-   private void Update()
-   {
-     anim.SetBool("isRunning", isInChaseRange);
-
-        isInChaseRange = Physics2D.OverlapCircle(transform.position, checkRadius, whatIsPlayer);
-        isInAttackRange = Physics2D.OverlapCircle(transform.position, attackRadius, whatIsPlayer);
-
-     dir = target.position - transform.position;
-     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-     dir.Normalize();
-     movement = dir;
-    if(shouldRotate)
+    private Animator anim;
+    public Slider EnemyLife;
+    void Start()
     {
-     anim.SetFloat("X", dir.x);
-     anim.SetFloat("V", dir.y);
+        anim = GetComponent<Animator>();
     }
-}
-private void Fixedupdate()
-{
-    if(isInChaseRange && !isInAttackRange)
+    private void OnEnable()
     {
-        MoveCharacter(movement);
+        m_ColCount = 0;
     }
-        if(isInAttackRange)
+
+    public bool State()
     {
-        rb.velocity = Vector2.zero;
+        if (m_DisableTimer > 0)
+            return false;
+        return m_ColCount > 0;
     }
-}
-private void MoveCharacter(Vector2 dir)
+
+    void OnTriggerEnter(Collider other)
     {
-        rb. MovePosition((Vector2)transform.position + (dir * speed * Time.deltaTime));
+        anim.Play("Attack");
+        m_ColCount++;
+        if (other.tag == "Player")
+        {
+            anim.SetBool("Hurt", true);
+            EnemyLife.value--;
+            if (EnemyLife.value == 0)
+            {
+                anim.SetBool("Death", true);
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        m_ColCount--;
+    }
+
+    void Update()
+    {
+        StartCoroutine(CounterLife());
+        m_DisableTimer -= Time.deltaTime;
+    }
+
+    public void Disable(float duration)
+    {
+        m_DisableTimer = duration;
+    }
+
+    IEnumerator CounterLife()
+    {
+        if (EnemyLife.value == 0)
+        {
+            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("Win");
+            Destroy(enemy);
+        }
+
     }
 }

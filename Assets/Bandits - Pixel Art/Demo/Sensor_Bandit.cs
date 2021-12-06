@@ -65,7 +65,7 @@ public class Sensor_Bandit : MonoBehaviour {
         if (EnemyLife.value == 0)
         {
             yield return new WaitForSeconds(1);
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("Boss 2");
             Destroy(enemy);
         }
 

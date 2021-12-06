@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: "Assets/5 \u2013 Camera/Boss 2.unity"
+=======
+- path: "Assets/5 \u2013 Camera/Camera.unity"
+>>>>>>> c1a3899f7c4acb14a37af10d0e4a244797238796
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -3,13 +3,12 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour {
    
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter(Collider other)
     {
-         if (other.gameObject.CompareTag("Player"))
-         {
-             SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 1);
-            
-            }
-    }  
+        if (other.tag == "Player")
+        {
+            SceneManager.LoadScene("Boss 1");
+        }
+    }
 
 }

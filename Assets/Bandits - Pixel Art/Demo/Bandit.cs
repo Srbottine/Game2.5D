@@ -23,10 +23,10 @@ public class Bandit : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //Check if character just landed on the ground
-        if (!m_grounded && m_groundSensor.State()) {
-            m_grounded = true;
-            m_animator.SetBool("Grounded", m_grounded);
-        }
+        //if (!m_grounded && m_groundSensor.State()) {
+        //    m_grounded = true;
+        //    m_animator.SetBool("Grounded", m_grounded);
+        //}
 
         //Check if character just started falling
         if(m_grounded && !m_groundSensor.State()) {

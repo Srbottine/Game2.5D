@@ -77,14 +77,14 @@ namespace Common.Scripts
       animator.SetBool(WALK_PROPERTY,
                        Math.Abs(_movement.sqrMagnitude) > Mathf.Epsilon);
     
-       //attack
-     // if(Time.time >= nextAttackTime)
-       // {
-      //      if(Input.GetKeyDown(KeyCode.Z)){
-        //        Attack();
-        //        nextAttackTime = Time.time + 1f / attackRate;
-          //  }
-      //  }
+      // attack
+     if(Time.time >= nextAttackTime)
+       {
+           if(Input.GetKeyDown(KeyCode.Z)){
+               Attack();
+              nextAttackTime = Time.time + 1f / attackRate;
+           }
+       }
 
     }
 
@@ -96,19 +96,12 @@ namespace Common.Scripts
     #endregion
   
 
-  //void Attack(){
+  void Attack(){
 
-        // Play attack animation
-       // animator.SetTrigger("Attack");
-
-        // Detect enemies in range of attack
-       // Collider[] hitEnemies = Physics.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-       // foreach (Collider enemy in hitEnemies)
-       // {
-        //    enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
-       // }
-
-   // }
+         //Play attack animation
+        animator.SetTrigger("Attack");
+ 
+    }
 
   }
 }
